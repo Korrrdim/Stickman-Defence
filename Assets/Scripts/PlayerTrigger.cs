@@ -60,23 +60,20 @@ public class PlayerTrigger : MonoBehaviour
         playerRenderer.material.color = colorForDead;
     }
 
-    private IEnumerator Rotate(Transform rotation)
+    private IEnumerator Rotate(Transform rotateTransform)
     {
-        float tempSpeed = PlayerMove.Speed;
-        PlayerMove.Speed = 0.0f;
-        playerAnimation.SetTrigger("Rotate");
-        yield return new WaitForSeconds(0.5f);
-        transform.position = new Vector3(rotation.position.x, transform.position.y, rotation.position.z);
+        transform.rotation = rotateTransform.rotation;
+        transform.position = new Vector3(rotateTransform.position.x, transform.position.y, rotateTransform.position.z);
+
         for (float t = 0; t < 1; t += Time.deltaTime / timeRotation)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation.rotation, curveRotation.Evaluate(t));
-            cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, rotation.rotation, curveRotation.Evaluate(t));
-            ballTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, rotation.rotation, curveRotation.Evaluate(t));
+            cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, rotateTransform.rotation, curveRotation.Evaluate(t));
+            ballTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, rotateTransform.rotation, curveRotation.Evaluate(t));
             yield return null;
         }
-        PlayerMove.Speed = tempSpeed;
-        transform.rotation = rotation.rotation;
-        Destroy(rotation.gameObject);
+
+        transform.rotation = rotateTransform.rotation;
+        Destroy(rotateTransform.gameObject);
     }
 
 }

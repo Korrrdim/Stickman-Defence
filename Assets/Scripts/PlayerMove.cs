@@ -5,17 +5,17 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float speed;
+    public static float Speed;
     [SerializeField] private Transform cameraTransform;
 
     private Rigidbody playerRigidbody;
     private Animator playerAnimation;
     private Vector3 movement;
     private Vector3 newCameraPos;
-    private float cameraDefaultPosZ;
 
     private void Start()
     {
-        cameraDefaultPosZ = cameraTransform.position.z;
+        Speed = speed;
         playerAnimation = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimation.SetBool("Run", true);
@@ -28,9 +28,11 @@ public class PlayerMove : MonoBehaviour
 
     private void forwardMove()
     {
-        movement = new Vector3(0.0f, 0.0f, speed);
+        movement = new Vector3 (0.0f, 0.0f, Speed);
+        movement = transform.TransformDirection(movement);
         playerRigidbody.velocity = movement;
-        newCameraPos = new Vector3(cameraTransform.position.x, cameraTransform.position.y, cameraDefaultPosZ + transform.position.z);
+
+        newCameraPos = transform.position;
         cameraTransform.position = newCameraPos;
     }
 }

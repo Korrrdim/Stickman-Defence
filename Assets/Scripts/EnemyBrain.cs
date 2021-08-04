@@ -11,6 +11,7 @@ public class EnemyBrain : MonoBehaviour
     [SerializeField] private float time = 2.0f;
 
     [Header("Look&Move at/to target")]
+
     [SerializeField] private float distance;
     [SerializeField] private float speed;
     [SerializeField] private Transform target;
@@ -53,14 +54,9 @@ public class EnemyBrain : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, target.transform.position) < distance)
         {
-            if (transform.position != target.transform.position)
-            {
-                enemyAnimator.SetBool("Run", true);
-                transform.position += transform.forward * speed;
-                transform.localPosition = new Vector3(transform.position.x, 0.5f, transform.position.z);
-            }
-            else
-                enemyAnimator.SetBool("Run", false);
+            enemyAnimator.SetBool("Run", true);
+            transform.position += transform.forward * speed;
+            transform.localPosition = new Vector3(transform.position.x, 0.5f, transform.position.z);
         }
     }
 

@@ -272,7 +272,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c596090edd5294d8a6ca2de2ab0471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curve:
+  ball: {fileID: 0}
+  curveColor:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  colorForDead: {r: 0.6117647, g: 0.5647059, b: 0.5647059, a: 0}
+  colorForBlink: {r: 0, g: 0.6745098, b: 1, a: 0}
+  timeColor: 2
+  curveRotation:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -296,9 +306,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  colorForDead: {r: 0.6117647, g: 0.5647059, b: 0.5647059, a: 0}
-  colorForBlink: {r: 0, g: 0.6745098, b: 1, a: 0}
-  time: 1
+  endRotation: {x: 0, y: -90, z: 0, w: 0}
+  timeRotation: 1
 --- !u!54 &1518814769382592606
 Rigidbody:
   m_ObjectHideFlags: 0
